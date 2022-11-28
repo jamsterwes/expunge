@@ -11,6 +11,8 @@ namespace ButtonMinigame
         [Range(2, 5)]
         public int size = 3;
 
+        public float buttonSizePx = 200.0f;
+
         Button[,] buttons;
 
         void Awake()
@@ -30,19 +32,25 @@ namespace ButtonMinigame
                     newButton.name = "Button (" + x.ToString() + ", " + y.ToString() + ")";
 
                     // Position button
-                    int fullSize = 200 * size;
-                    int halfSize = fullSize / 2;
-                    int offset = -halfSize + 100;
-                    int xPos = offset + 200 * x;
-                    int yPos = offset + 200 * y;
+                    float fullSize = buttonSizePx * size;
+                    float halfSize = fullSize / 2;
+                    float offset = -halfSize + buttonSizePx / 2;
+                    float xPos = offset + buttonSizePx * x;
+                    float yPos = offset + buttonSizePx * y;
                     newButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos, yPos);
-                    newButton.GetComponent<RectTransform>().localScale = Vector3.one;
+                    newButton.GetComponent<RectTransform>().localScale = buttonSizePx * Vector3.one;
 
                     // Connect button to manager
                     buttons[x,y] = newButton.GetComponent<Button>();
                     buttons[x,y].manager = this;
                     buttons[x,y].SetPosition(x, y);
                 }
+            }
+
+            // Randomly press some buttons
+            for (int p = 0; p < 4; p++)
+            {
+                ButtonPressed(Random.Range(0, size), Random.Range(0, size));
             }
         }
 
