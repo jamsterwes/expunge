@@ -8,10 +8,13 @@ namespace ButtonMinigame
     {
         public GameObject buttonPrefab;
 
-        [Range(2, 5)]
+        [Range(2, 8)]
         public int size = 3;
 
         public float buttonSizePx = 200.0f;
+
+        [Range(0, 64)]
+        public int initialPresses = 8;
 
         Button[,] buttons;
 
@@ -48,7 +51,7 @@ namespace ButtonMinigame
             }
 
             // Randomly press some buttons
-            for (int p = 0; p < 4; p++)
+            for (int p = 0; p < initialPresses; p++)
             {
                 ButtonPressed(Random.Range(0, size), Random.Range(0, size));
             }
