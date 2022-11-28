@@ -36,6 +36,7 @@ namespace ButtonMinigame
                     int xPos = offset + 200 * x;
                     int yPos = offset + 200 * y;
                     newButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos, yPos);
+                    newButton.GetComponent<RectTransform>().localScale = Vector3.one;
 
                     // Connect button to manager
                     buttons[x,y] = newButton.GetComponent<Button>();
