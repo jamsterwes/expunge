@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ButtonMinigame
 {
+    [RequireComponent(typeof(AudioSource))]
     public class Button : MonoBehaviour
     {
         [HideInInspector]
@@ -19,6 +20,9 @@ namespace ButtonMinigame
 
         // Images for on/off
         public Image OnImage, OffImage;
+
+        // Audio clip for button press
+        public AudioClip PressSound;
 
         void Start()
         {
@@ -36,6 +40,9 @@ namespace ButtonMinigame
         {
             // Tell manager to flip
             manager.ButtonPressed(x, y);
+
+            // Play sound
+            GetComponent<AudioSource>().PlayOneShot(PressSound, 0.5f);
         }
 
         public void Flip()
