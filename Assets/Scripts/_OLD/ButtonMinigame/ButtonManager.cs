@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ButtonMinigame
 {
+    delegate void PuzzleSolve();
+
     public class ButtonManager : MonoBehaviour
     {
+        // Delegates
+        PuzzleSolve puzzleSolved;
+
+        // TODO: move this somewhere better
+        public GameObject solvedText;
+
         public GameObject buttonPrefab;
 
         [Range(2, 8)]
@@ -20,6 +29,11 @@ namespace ButtonMinigame
 
         void Awake()
         {
+            // Subscribe to puzzle solved delegate
+            puzzleSolved += () => {
+                solvedText.SetActive(true);
+            };
+
             // Build grid of buttons
             buttons = new Button[size, size];
 
@@ -67,6 +81,22 @@ namespace ButtonMinigame
             }
             // Flip original button
             buttons[x,y].Flip();
+        }
+
+        public void CheckIsSolved()
+        {
+            bool flipped = false;
+            for (int x = 0; x < size; x++)
+            {
+                for (int y = 0; y < size; y++)
+                {
+                    if (x == 0 && y == 0) flipped = buttons[x,y].buttonOn;
+                    else if (flipped != buttons[x,y].buttonOn) return;
+                }
+            }
+            if (puzzleSolved != null) {
+                puzzleSolved();
+            }
         }
     }
 }
