@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameTimer : MonoBehaviour
+public class MinigameManager : MonoBehaviour
 {
     // UI element for timer fill
     public Image timerEmpty;
