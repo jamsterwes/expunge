@@ -12,9 +12,6 @@ namespace ButtonMinigame
         // Delegates
         PuzzleSolve puzzleSolved;
 
-        // TODO: move this somewhere better
-        public GameObject solvedText;
-
         public GameObject buttonPrefab;
 
         [Range(2, 8)]
@@ -31,11 +28,28 @@ namespace ButtonMinigame
         {
             // Subscribe to puzzle solved delegate
             puzzleSolved += () => {
-                solvedText.SetActive(true);
+                WorldManager.inst.OnPuzzleSolve();
             };
 
             // Build grid of buttons
             buttons = new Button[size, size];
+
+            // Initialize puzzle
+            InitializePuzzle();
+        }
+
+        public void InitializePuzzle(bool clearPrevious = false)
+        {
+            if (clearPrevious)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    for (int y = 0; y < size; y++)
+                    {
+                        Destroy(buttons[x,y].gameObject);
+                    }
+                }
+            }
 
             for (int x = 0; x < size; x++)
             {

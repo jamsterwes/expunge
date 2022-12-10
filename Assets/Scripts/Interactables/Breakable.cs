@@ -32,6 +32,9 @@ public class Breakable : MonoBehaviour, IInteractable
 
     public void OnInteract(WorldManager wm)
     {
+        // Can things be broken?
+        if (!wm.CanBreak()) return;
+
         // Test/set object to broken
         if (broken) return;
         broken = true;
