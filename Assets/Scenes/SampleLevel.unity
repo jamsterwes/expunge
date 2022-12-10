@@ -9851,7 +9851,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2346719757109382073, guid: 0723b8fe86231d34c87774a04309655b, type: 3}
       propertyPath: solveTime
-      value: 400
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2346719757109382073, guid: 0723b8fe86231d34c87774a04309655b, type: 3}
       propertyPath: buttonManager
