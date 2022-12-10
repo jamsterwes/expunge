@@ -16,7 +16,7 @@ namespace ButtonMinigame
         int x, y;
 
         // If button is turned on or not
-        bool buttonOn = false;
+        public bool buttonOn = false;
 
         // Images for on/off
         public Image OnImage, OffImage;
@@ -40,6 +40,9 @@ namespace ButtonMinigame
         {
             // Tell manager to flip
             manager.ButtonPressed(x, y);
+            
+            // Check is solved?
+            manager.CheckIsSolved();
 
             // Play sound
             GetComponent<AudioSource>().PlayOneShot(PressSound, 0.5f);
