@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class MinigameManager : MonoBehaviour
 {
@@ -27,7 +26,7 @@ public class MinigameManager : MonoBehaviour
         
         if (timeRemaining <= 0.0f)
         {
-            SceneManager.LoadScene("DeathScreen");
+            WorldManager.inst.Die();
             return;
         }
 

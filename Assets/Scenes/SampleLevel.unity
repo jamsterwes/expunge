@@ -2087,6 +2087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8215044286538fd41853527f736be385, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 112382617}
   minigameUI: {fileID: 1253518880}
 --- !u!4 &1687799402
 Transform:
