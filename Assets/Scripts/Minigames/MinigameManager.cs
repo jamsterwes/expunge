@@ -12,6 +12,7 @@ public class MinigameManager : MonoBehaviour
     private float startTime;
 
     public bool running = true;
+    public ButtonMinigame.ButtonManager buttonManager;
 
     void Start()
     {
@@ -31,5 +32,11 @@ public class MinigameManager : MonoBehaviour
         }
 
         timerEmpty.fillAmount = 1.0f - (timeRemaining / solveTime);
+    }
+
+    public void Restart()
+    {
+        startTime = Time.time;
+        buttonManager.InitializePuzzle(true);
     }
 }

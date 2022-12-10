@@ -13,12 +13,31 @@ public class WorldManager : MonoBehaviour
     // Minigame UI (TEMP)
     [Header("Minigame")]
     public GameObject minigameUI;
+    public MinigameManager minigameManager;
+
+    // STATE
+    private bool canBreak = true;
 
     // Handle objects being broken
     public void OnObjectBroken(GameObject gameObject)
     {
         // Spawn minigame
         minigameUI.SetActive(true);
+
+        // Restart game
+        minigameManager.Restart();
+
+        // Disable breaking
+        canBreak = false;
+    }
+
+    public void OnPuzzleSolve()
+    {
+        // Re-enable breaking
+        canBreak = true;
+
+        // Despawn minigame
+        minigameUI.SetActive(false);
     }
 
     // Die
@@ -26,6 +45,12 @@ public class WorldManager : MonoBehaviour
     {
         SceneManager.LoadScene("DeathScreen");
     }
+
+    public bool CanBreak()
+    {
+        return canBreak;
+    }
+
     void Update()
     {
         // Kill player if it falls too low
