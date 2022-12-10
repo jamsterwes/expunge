@@ -17,6 +17,7 @@ public class WorldManager : MonoBehaviour
 
     // STATE
     private bool canBreak = true;
+    private int playerLives = 3;
 
     // Handle objects being broken
     public void OnObjectBroken(GameObject gameObject)
@@ -41,9 +42,15 @@ public class WorldManager : MonoBehaviour
     }
 
     // Die
-    public void Die()
+    public void Die(bool forceDie = false)
     {
-        SceneManager.LoadScene("DeathScreen");
+        if (playerLives <= 1 || forceDie) SceneManager.LoadScene("DeathScreen");
+        else playerLives--;
+    }
+
+    public int GetLives()
+    {
+        return playerLives;
     }
 
     public bool CanBreak()
@@ -54,7 +61,7 @@ public class WorldManager : MonoBehaviour
     void Update()
     {
         // Kill player if it falls too low
-        if (playerTransform.position.y < -20.0f) Die();
+        if (playerTransform.position.y < -20.0f) Die(true);
     }
 
     // Singleton thyself
